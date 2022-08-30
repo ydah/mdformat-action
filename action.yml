@@ -1,0 +1,33 @@
+name: mdformat-action
+author: ydah <t.yudai92@gmail.com>
+description: Github Action for linting markdown files using mdformat.
+branding:
+  icon: 'sliders'
+  color: 'blue'
+inputs:
+  file_or_dir:
+    description: 'File or Directory to do mdformat on'
+    required: false
+    default: '.'
+  check:
+    description: 'Do not apply changes to files'
+    required: false
+    default: '1'
+  number:
+    description: 'Apply consecutive numbering to ordered lists'
+    required: false
+    default: '0'
+  wrap:
+    description: 'Paragraph word wrap mode (default: keep)'
+    required: false
+    default: 'keep'
+  end_of_line:
+    description: 'Output file line ending mode (default: lf)'
+    required: false
+    default: 'lf'
+outputs:
+  mdformat_output:
+    description: 'Output of mdformat'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
