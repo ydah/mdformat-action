@@ -35,7 +35,8 @@ run_mdformat() {
 
   if [ ${lint_exit_code} -ne 0 ]; then
     echo "lint: error: failed mdformat on ${file_or_dir}."
-    echo "${lint_output}"
+    mdformat ${number} ${wrap} ${end_of_line} ${file_or_dir}
+    git diff
     echo
   fi
 
