@@ -9,10 +9,6 @@ inputs:
     description: 'File or Directory to do mdformat on'
     required: false
     default: '.'
-  check:
-    description: 'Do not apply changes to files'
-    required: false
-    default: '1'
   number:
     description: 'Apply consecutive numbering to ordered lists'
     required: false
