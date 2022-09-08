@@ -28,15 +28,19 @@ run_mdformat() {
   lint_exit_code=${?}
 
   if [ ${lint_exit_code} -eq 0 ]; then
-    echo "lint: info: successful mdformat on ${file_or_dir}."
+    echo "### Linting successful! :rocket:" >>$GITHUB_STEP_SUMMARY
     echo "${lint_output}"
     echo
   fi
 
   if [ ${lint_exit_code} -ne 0 ]; then
-    echo "lint: error: failed mdformat on ${file_or_dir}."
+    echo "### Linting failed! :astonished:" >>$GITHUB_STEP_SUMMARY
+    echo "Please fix the following changes or format with mdformat:" >>$GITHUB_STEP_SUMMARY
     mdformat ${number} ${wrap} ${end_of_line} ${file_or_dir}
-    git diff
+    format_diff=$(git diff)
+    echo '```diff' >>$GITHUB_STEP_SUMMARY
+    echo "${format_diff}" >>$GITHUB_STEP_SUMMARY
+    echo '```' >>$GITHUB_STEP_SUMMARY
     echo
   fi
 
