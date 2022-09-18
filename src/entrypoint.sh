@@ -20,6 +20,11 @@ parse_inputs() {
   if [ -n "${INPUT_END_OF_LINE}" ]; then
     end_of_line="--end-of-line ${INPUT_END_OF_LINE}"
   fi
+
+  auto_correct=''
+  if [ "${INPUT_AUTO_CORRECT}" == "1" ] || [ "${INPUT_AUTO_CORRECT}" == "true" ]; then
+    auto_correct=1
+  fi
 }
 
 run_mdformat() {
@@ -31,9 +36,11 @@ run_mdformat() {
     echo "### Linting successful! :rocket:" >>$GITHUB_STEP_SUMMARY
     echo "${lint_output}"
     echo
+    echo ::set-output name=mdformat_output::"${lint_output}"
+    exit ${lint_exit_code}
   fi
 
-  if [ ${lint_exit_code} -ne 0 ]; then
+  if [ ${auto_correct} -ne 1 ]; then
     echo "### Linting failed! :astonished:" >>$GITHUB_STEP_SUMMARY
     echo "Please fix the following changes or format with mdformat:" >>$GITHUB_STEP_SUMMARY
     mdformat ${number} ${wrap} ${end_of_line} ${file_or_dir}
@@ -42,6 +49,18 @@ run_mdformat() {
     echo "${format_diff}" >>$GITHUB_STEP_SUMMARY
     echo '```' >>$GITHUB_STEP_SUMMARY
     echo
+  else
+    echo "### Linting failed! :astonished:" >>$GITHUB_STEP_SUMMARY
+    echo "Add the modified commit:"
+    echo "${lint_output}"
+    echo
+    mdformat ${number} ${wrap} ${end_of_line} ${file_or_dir}
+    git config user.name "${GITHUB_ACTOR}"
+    git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+    git add -u
+    git commit -m "mdformat ${number} ${wrap} ${end_of_line} ${file_or_dir}"
+    git push
+    lint_exit_code=0
   fi
 
   echo ::set-output name=mdformat_output::"${lint_output}"
