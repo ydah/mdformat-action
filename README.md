@@ -41,12 +41,12 @@ jobs:
 
 ### `wrap`
 
-- Paragraph word wrap mode.
-  - keep
-  - no
-  - INTEGER
-- default: `keep`
-- optional
+* Paragraph word wrap mode.
+  * keep
+  * no
+  * INTEGER
+* default: `keep`
+* optional
 
 ### `end_of_line`
 
