@@ -6,17 +6,17 @@ parse_inputs() {
     file_or_dir="${INPUT_FILE_OR_DIR}"
   fi
 
-  number=''
+  number=""
   if [ "${INPUT_NUMBER}" == "1" ] || [ "${INPUT_NUMBER}" == "true" ]; then
     number="--number"
   fi
 
-  wrap=''
+  wrap=""
   if [ -n "${INPUT_WRAP}" ]; then
     wrap="--wrap ${INPUT_WRAP}"
   fi
 
-  end_of_line=''
+  end_of_line=""
   if [ -n "${INPUT_END_OF_LINE}" ]; then
     end_of_line="--end-of-line ${INPUT_END_OF_LINE}"
   fi
