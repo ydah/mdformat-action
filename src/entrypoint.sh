@@ -21,7 +21,7 @@ parse_inputs() {
     end_of_line="--end-of-line ${INPUT_END_OF_LINE}"
   fi
 
-  auto_correct=''
+  auto_correct=0
   if [ "${INPUT_AUTO_CORRECT}" == "1" ] || [ "${INPUT_AUTO_CORRECT}" == "true" ]; then
     auto_correct=1
   fi
@@ -40,7 +40,7 @@ run_mdformat() {
     exit ${lint_exit_code}
   fi
 
-  if [ ${auto_correct} -ne 1 ]; then
+  if [ ${auto_correct} -eq 0 ]; then
     echo "### Linting failed! :astonished:" >>$GITHUB_STEP_SUMMARY
     echo "Please fix the following changes or format with mdformat:" >>$GITHUB_STEP_SUMMARY
     mdformat ${number} ${wrap} ${end_of_line} ${file_or_dir}
