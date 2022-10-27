@@ -56,3 +56,9 @@ jobs:
   - keep
 - default: `lf`
 - optional
+
+### `auto_correct`
+
+- Adding commit by autocorrect for mdformat.
+- default: `false`
+- optional

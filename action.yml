@@ -22,7 +22,7 @@ inputs:
     required: false
     default: 'lf'
   auto_correct:
-    description: 'Apply consecutive numbering to ordered lists'
+    description: 'Adding commit by autocorrect for mdformat'
     required: false
     default: '0'
 outputs:
