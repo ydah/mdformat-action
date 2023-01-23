@@ -36,7 +36,7 @@ run_mdformat() {
     echo "### Linting successful! :rocket:" >>$GITHUB_STEP_SUMMARY
     echo "${lint_output}"
     echo
-    echo ::set-output name=mdformat_output::"${lint_output}"
+    echo "{mdformat_output}=${lint_output}" >>$GITHUB_OUTPUT
     exit ${lint_exit_code}
   fi
 
@@ -63,7 +63,7 @@ run_mdformat() {
     lint_exit_code=0
   fi
 
-  echo ::set-output name=mdformat_output::"${lint_output}"
+  echo "{mdformat_output}=${lint_output}" >>$GITHUB_OUTPUT
   exit ${lint_exit_code}
 }
 
