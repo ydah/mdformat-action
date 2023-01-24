@@ -24,5 +24,6 @@ jobs:
         uses: ydah/mdformat-action@main
         with:
           number: true
+          auto_correct: true
         env:
           GITHUB_ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
