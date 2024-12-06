@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- Add mdformat-tables to Dockerfile dependencies.
+
 ## 0.2.0 - 2022-10-27
 
 ### Added
