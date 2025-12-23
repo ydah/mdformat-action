@@ -1,4 +1,4 @@
-FROM python:3.10-bullseye
+FROM python:3.13-bullseye
 RUN apt-get update
 RUN apt-get upgrade -y
 RUN pip install --upgrade pip
