@@ -21,7 +21,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Mdformat
-        uses: ydah/mdformat-action@main
+        uses: ./
         with:
           number: true
         env:
